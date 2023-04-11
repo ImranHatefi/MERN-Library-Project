@@ -24,24 +24,24 @@ const bookSchema = new mongoose.Schema({
 }, {timestamps: true})
 
 
-const BookStore = mongoose.model("BookStore", bookSchema);
+// const BookStore = mongoose.model("BookStore", bookSchema);
 
 
-class DBUtility {
+// class DBUtility {
 
-    static deleteBook(id) {
-        return new Promise((resolve, reject) => {
-            BookStore.findByIdAndDelete(id, (err) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(`Deleted book ${id} successfully`);
-                }
-            });
-        });
-    }
-}
+//     static deleteBook(id) {
+//         return new Promise((resolve, reject) => {
+//             BookStore.findByIdAndDelete(id, (err) => {
+//                 if (err) {
+//                     reject(err);
+//                 } else {
+//                     resolve(`Deleted book ${id} successfully`);
+//                 }
+//             });
+//         });
+//     }
+// }
 
-exports.DBUtility = DBUtility;
+// exports.DBUtility = DBUtility;
 
 module.exports = mongoose.model("BookStore", bookSchema);

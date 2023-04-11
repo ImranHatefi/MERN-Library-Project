@@ -24,6 +24,16 @@ app.get('/books', (req,res)=>{
     BookStore.find().then(books => res.json(books));
 })
 
+// app.get('/books', async (req, res) => {
+//     try {
+//       const books = await BookStore.find();
+//       res.json(books);
+//     } catch (err) {
+//       console.log(err);
+//       res.status(500).json({ message: 'Server error' });
+//     }
+//   });
+
 
 app.post('/newbook', async (req,res) => {
     try{
@@ -44,6 +54,8 @@ app.post('/newbook', async (req,res) => {
     }
 })
 
+//Video DELETE.
+
 // app.delete('/delete/:id',(req,res) => {
 //     const id = req.params.id;
 //     BookStore.findByIdAndDelete({_id: id}, (err) => { 
@@ -55,16 +67,45 @@ app.post('/newbook', async (req,res) => {
 //     })
 // })
 
-app.delete('/delete/:id', async (req, res) => {
-    const id = req.params.id;
-    console.log(`req.params.id: ${req.params.id}`);
-    try {
-        const response = await BookStore.DBUtility.deleteBook(id);
-        res.status(200).json(books);
-    } catch (err) {
-        res.json(err);
+//JOSHGUN DELETE
+
+// app.delete('/delete/:id', async (req,res) => {
+//     try{
+//         const id = req.params.id
+//         await BookStore.findByIdAndDelete({_id: id})
+//     }catch(err){
+//         console.log(err);
+//     }
+
+// })
+
+
+// ChatGPT Delete
+
+app.delete('/delete/:id', async (req,res) => {
+    try{
+        const id = req.params.id
+        await BookStore.findByIdAndDelete(id)
+        res.sendStatus(204); // send a "no content" response status to indicate successful deletion
+    }catch(err){
+        console.log(err);
+        res.sendStatus(500); // send a "server error" response status to indicate an error occurred
     }
-});
+})
+
+
+//Weird Stackoverflow Delete
+
+// app.delete('/delete/:id', async (req, res) => {
+//     const id = req.params.id;
+//     console.log(`req.params.id: ${req.params.id}`);
+//     try {
+//         const response = await BookStore.DBUtility.deleteBook(id);
+//         res.status(200).json(books);
+//     } catch (err) {
+//         res.json(err);
+//     }
+// });
 
 app.listen(5000, ()=>{
   console.log('Server working!');
